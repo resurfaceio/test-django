@@ -7,7 +7,7 @@ This was cloned from Heroku's [Getting Started on Heroku with Python](https://de
 ```
 heroku create {appname}
 git push heroku master
-browse to http://{appname}.herokuapp.com/messages
+browse to http://{appname}.herokuapp.com
 ```
 
 ## Running locally

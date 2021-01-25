@@ -13,11 +13,13 @@ browse to http://{appname}.herokuapp.com
 ## Running locally
 
 ```
+pip install git+https://github.com/resurfaceio/logger-python (or from local directory)
 brew services start postgresql
 createdb python_getting_started
-python -m venv getting-started
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py collectstatic
-heroku local
+python3 -m venv getting-started
+env LDFLAGS='-L/usr/local/lib -L/usr/local/opt/openssl/lib -L/usr/local/opt/readline/lib' pip3 install -r requirements.txt
+python3 manage.py migrate
+python3 manage.py collectstatic
+USAGE_LOGGERS_URL="http://localhost:4001/message" heroku local
+pip uninstall usagelogger
 ```

@@ -8,13 +8,13 @@ from .types import LogsType
 class Query(graphene.ObjectType):
     logs = graphene.List(LogsType)
 
-    def resolve_logs(self, ingo, root):
+    def resolve_logs(self, ingo):
         logs_ = Logs.objects.all()
         return logs_
 
 
-class Mutation(graphene.Mutation):
-    add_log = graphene.Field(AddLog)
+class Mutation(graphene.ObjectType):
+    add_log = AddLog.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

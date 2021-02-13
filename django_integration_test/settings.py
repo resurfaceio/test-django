@@ -55,6 +55,14 @@ MIDDLEWARE = [
     # "usagelogger.django.HttpLoggerForDjango",
 ]
 
+INSTALLED_APPS += [
+    "corsheaders",
+]
+
+MIDDLEWARE += [
+    "corsheaders.middleware.CorsMiddleware",
+]
+
 ROOT_URLCONF = "django_integration_test.urls"
 
 AUTH_USER_MODEL = "core.User"
@@ -143,3 +151,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:8000",
+    "https://localhost:8000",
+    "http://127.0.0.1:8000",
+    "https://127.0.0.1:8000",
+]
+
+CORS_ALLOW_CREDENTIALS = True

@@ -1,4 +1,5 @@
 import graphene
+from graphql import GraphQLError
 
 from .models import User
 from .mutations import CreateUser
@@ -6,11 +7,13 @@ from .types import UserType
 
 
 class Query(graphene.ObjectType):
-    users = graphene.List(UserType)
+    user = graphene.Field(UserType)
 
-    def resolve_users(self, info):
-        users = User.objects.all()
-        return users
+    def resolve_user(self, info):
+        user = info.context.user
+        if user.is_anonymous:
+            raise GraphQLError("You are not logged in")
+        return user
 
 
 class Mutation(graphene.ObjectType):

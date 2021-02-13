@@ -1,0 +1,1 @@
+from django_integration_test.core.models.user import User

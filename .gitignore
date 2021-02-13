@@ -1,6 +1,8 @@
-venv
-*.pyc
-staticfiles
-.env
-db.sqlite3
-getting-started/*
+*_cache
+.venv
+.vscode
+__pycache__
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+*.sqlite3

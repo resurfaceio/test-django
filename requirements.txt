@@ -3,4 +3,6 @@ gunicorn
 graphene_django
 django-heroku
 django-graphql-jwt
+django-cors-headers
 pyjwt==1.7.0
+git+git://github.com/resurfaceio/logger-python@master#egg=usagelogger

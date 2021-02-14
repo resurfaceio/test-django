@@ -36,11 +36,10 @@ $ python manage.py migrate --run-syncdb
 ```
 $ docker build -t django-integration-test:v0 .
 $ docker run --env-file .env django-integration-test:v0 sh -c "python manage.py makemigrations && python manage.py migrate --run-syncdb"
-
 $ docker run --env-file .env -p 80:8000 django-integration-test:v0
-
-
 ```
+
+Now you can access the app from: `http://localhost/`
 
 ## Heroku Deployment
 

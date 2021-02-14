@@ -49,3 +49,17 @@ heroku container:push web --app $HEROKU_APP_NAME
 heroku container:release web --app $HEROKU_APP_NAME
 heroku config:set WORKERS=2 --app $HEROKU_APP_NAME
 ```
+
+# HTTP Health Check
+
+Request:
+
+```bash
+curl http://localhost:8000/ping
+```
+
+Response:
+
+```
+{"msg": "pong"}
+```

@@ -52,7 +52,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    # "usagelogger.django.HttpLoggerForDjango",
+    "usagelogger.django.HttpLoggerForDjango",
 ]
 
 INSTALLED_APPS += [

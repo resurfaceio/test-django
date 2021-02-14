@@ -47,4 +47,5 @@ Now you can access the app from: `http://localhost/`
 heroku container:login
 heroku container:push web --app $HEROKU_APP_NAME
 heroku container:release web --app $HEROKU_APP_NAME
+heroku config:set WORKERS=2 --app $HEROKU_APP_NAME
 ```

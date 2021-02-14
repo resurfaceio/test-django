@@ -52,6 +52,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django_integration_test.404_middleware.JSON404Middleware",
     "usagelogger.django.HttpLoggerForDjango",
 ]
 

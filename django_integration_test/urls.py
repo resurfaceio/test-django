@@ -18,8 +18,11 @@ from django.urls import include, path
 from django.views.decorators.csrf import csrf_exempt
 from graphene_django.views import GraphQLView
 
+from .views import pong
+
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    # path("admin/", admin.site.urls),
+    path("ping", pong, name="ping-pong"),
     path("graphql", GraphQLView.as_view(graphiql=True), name="graphql"),
     path("", csrf_exempt(GraphQLView.as_view(graphiql=False)), name="index"),
 ]

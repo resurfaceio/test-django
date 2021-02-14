@@ -1,10 +1,16 @@
 # GraphQl Documentation
 
-GraGraphQL documentation can be accessed from the GraphiQL GUI on `/graphql` endpoint.
+GraphQL documentation can be accessed from the GraphiQL GUI on `/graphql` endpoint.
 
 ```
 http://localhost:8000/graphql
 
+```
+
+GraphQL endpoint can be accessed at:
+
+```
+http://localhost:8000/
 ```
 
 ## General Queries
@@ -63,7 +69,7 @@ Example:
 
 ```
 mutation{
-  addLog(log: "This is my log"){
+  addLog(log: "I am having a nice day today!"){
     log{
       id
       log

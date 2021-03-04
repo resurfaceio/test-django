@@ -1,25 +1,65 @@
-# test-django-heroku
+# Integration testing app for python usagelogger
 
-This was cloned from Heroku's [Getting Started on Heroku with Python](https://devcenter.heroku.com/articles/getting-started-with-python) app at commit `2fde3b4`. We prefer to keep our own copy to keep our tests from breaking without warning.
+## Run the project (Development)
 
-## Running at Heroku
+Note: You should be on the project root directory
 
-```
-heroku create {appname}
-git push heroku master
-browse to http://{appname}.herokuapp.com
-```
-
-## Running locally
+### Create virtual env
 
 ```
-pip install git+https://github.com/resurfaceio/logger-python (or from local directory)
-brew services start postgresql
-createdb python_getting_started
-python3 -m venv getting-started
-env LDFLAGS='-L/usr/local/lib -L/usr/local/opt/openssl/lib -L/usr/local/opt/readline/lib' pip3 install -r requirements.txt
-python3 manage.py migrate
-python3 manage.py collectstatic
-USAGE_LOGGERS_URL="http://localhost:4001/message" heroku local
-pip uninstall usagelogger
+$ python -m venv .venv
+$ source activate ./.venv/bin/activate
+```
+
+### Install requirements
+
+```
+$ pip install requirements.txt
+```
+
+### Run migrations
+
+```
+$ python manage.py makemigrations
+$ python manage.py migrate
+```
+
+Important: If User table is not created then run the following command
+
+```
+$ python manage.py migrate --run-syncdb
+
+```
+
+## Docker Deployment
+
+```
+$ docker build -t django-integration-test:v0 .
+$ docker run --env-file .env django-integration-test:v0 sh -c "python manage.py makemigrations && python manage.py migrate --run-syncdb"
+$ docker run --env-file .env -p 80:8000 django-integration-test:v0
+```
+
+Now you can access the app from: `http://localhost/`
+
+## Heroku Deployment
+
+```
+heroku container:login
+heroku container:push web --app $HEROKU_APP_NAME
+heroku container:release web --app $HEROKU_APP_NAME
+heroku config:set WORKERS=2 --app $HEROKU_APP_NAME
+```
+
+# HTTP Health Check
+
+Request:
+
+```bash
+curl http://localhost:8000/ping
+```
+
+Response:
+
+```
+{"msg": "pong"}
 ```

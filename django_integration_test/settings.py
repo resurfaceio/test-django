@@ -53,7 +53,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django_integration_test.404_middleware.JSON404Middleware",
-    "usagelogger.middlewares.HttpLoggerForDjango",
+    "usagelogger.django.HttpLoggerForDjango",
 ]
 
 INSTALLED_APPS += [

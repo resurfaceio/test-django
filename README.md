@@ -7,6 +7,7 @@ rm -rf .venv
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+pip install git+https://github.com/resurfaceio/logger-python
 python manage.py makemigrations
 python manage.py migrate --run-syncdb
 docker build -t test-django-heroku .

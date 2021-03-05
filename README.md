@@ -2,7 +2,7 @@
 
 ## Docker Build
 
-```bash
+```
 rm -rf .venv
 python -m venv .venv
 source .venv/bin/activate
@@ -15,7 +15,7 @@ deactivate
 
 ## Docker Deployment
 
-```bash
+```
 docker run --env-file .env test-django-heroku sh -c "python manage.py makemigrations && python manage.py migrate --run-syncdb"
 docker run --env-file .env -p 80:8000 test-django-heroku
 ```
@@ -24,7 +24,7 @@ Now you can access the app from: `http://localhost/`
 
 ## Heroku Deployment
 
-```bash
+```
 heroku container:login
 heroku container:push web --app $HEROKU_APP_NAME
 heroku container:release web --app $HEROKU_APP_NAME
@@ -35,12 +35,12 @@ heroku config:set WORKERS=2 --app $HEROKU_APP_NAME
 
 Request:
 
-```bash
+```
 curl http://localhost:8000/ping
 ```
 
 Response:
 
-```bash
+```
 {"msg": "pong"}
 ```

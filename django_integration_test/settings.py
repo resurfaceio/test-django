@@ -53,7 +53,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django_integration_test.404_middleware.JSON404Middleware",
-    "usagelogger.django.HttpLoggerForDjango",
+    "usagelogger.middlewares.HttpLoggerForDjango",
 ]
 
 INSTALLED_APPS += [
@@ -71,6 +71,7 @@ AUTH_USER_MODEL = "core.User"
 
 USAGELOGGER = {
     "rules": "include debug",
+    "url": "http://localhost:4001/message",
 }
 
 GRAPHENE = {

@@ -10,15 +10,22 @@ pip install -r requirements.txt
 pip install git+https://github.com/resurfaceio/logger-python
 python manage.py makemigrations
 python manage.py migrate --run-syncdb
-docker build -t test-django-heroku .
+docker build -t test-django-heroku . --no-cache
 deactivate
 ```
 
 ## Docker Deployment
 
 ```
-docker run --env-file .env test-django-heroku sh -c "python manage.py makemigrations && python manage.py migrate --run-syncdb"
-docker run --env-file .env -p 80:8000 test-django-heroku
+docker run --env-file .env -p 80:8000 --name test-django-heroku -t test-django-heroku
+docker container exec -it  test-django bash
+```
+Run the following migrations inside docker bash
+
+```
+python manage.py makemigrations
+python manage.py migrate
+python manage.py migrate --run-syncdb
 ```
 
 Now you can access the app from: `http://localhost/`

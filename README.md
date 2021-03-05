@@ -1,6 +1,6 @@
 # test-django-heroku
 
-## Docker Build
+## Run project locally
 
 ```
 rm -rf .venv
@@ -10,13 +10,13 @@ pip install -r requirements.txt
 pip install git+https://github.com/resurfaceio/logger-python
 python manage.py makemigrations
 python manage.py migrate --run-syncdb
-docker build -t test-django-heroku . --no-cache
 deactivate
 ```
 
-## Docker Deployment
+## Run project on Docker
 
 ```
+docker build -t test-django-heroku . --no-cache
 docker run --env-file .env -p 80:8000 --name test-django-heroku -t test-django-heroku
 docker container exec -it  test-django bash
 ```

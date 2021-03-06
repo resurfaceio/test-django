@@ -17,8 +17,8 @@ deactivate
 
 ```
 docker build -t test-django-heroku . --no-cache
-docker run --env-file .env -p 80:8000 --name test-django-heroku -t test-django-heroku
-docker container exec -it  test-django bash
+docker run --env-file .env -d -p 80:8000 --name test-django-heroku -t test-django-heroku
+docker container exec -it  test-django-heroku bash
 ```
 Run the following migrations inside docker bash
 

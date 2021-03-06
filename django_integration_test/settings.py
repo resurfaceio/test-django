@@ -71,7 +71,6 @@ AUTH_USER_MODEL = "core.User"
 
 USAGELOGGER = {
     "rules": "include debug",
-    "url": "http://localhost:4001/message",
 }
 
 GRAPHENE = {

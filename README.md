@@ -1,54 +1,27 @@
-# test-django-heroku
+# test-django
 
-## Run project locally
-
-```
-rm -rf .venv
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-pip install git+https://github.com/resurfaceio/logger-python
-python manage.py makemigrations
-python manage.py migrate --run-syncdb
-deactivate
-```
-
-## Run project on Docker
+## Docker Deployment
 
 ```
-docker build -t test-django-heroku . --no-cache
-docker run --env-file .env -d -p 80:8000 --name test-django-heroku -t test-django-heroku
-docker container exec -it  test-django-heroku bash
+docker build -t test-django --no-cache .
+docker run -d --name test-django -e USAGE_LOGGERS_URL="http://marina:4001/message" -e WORKERS=2 -e PORT=8000 -p 80:8000 test-django
+curl "http://localhost/ping"
+docker logs -f test-django
+docker stop test-django
+docker rm test-django
 ```
-Run the following migrations inside docker bash
-
-```
-python manage.py makemigrations
-python manage.py migrate
-python manage.py migrate --run-syncdb
-```
-
-Now you can access the app from: `http://localhost/`
+* Don't set USAGE_LOGGERS_URL to `localhost` (your Resurface database isn't running inside *this* container)
+* For maximum performance, leave out USAGE_LOGGERS_URL to disable loggers completely
 
 ## Heroku Deployment
 
 ```
+heroku create XXX-resurface
 heroku container:login
-heroku container:push web --app $HEROKU_APP_NAME
-heroku container:release web --app $HEROKU_APP_NAME
-heroku config:set WORKERS=2 --app $HEROKU_APP_NAME
-```
-
-# HTTP Health Check
-
-Request:
-
-```
-curl http://localhost:8000/ping
-```
-
-Response:
-
-```
-{"msg": "pong"}
+heroku container:push web
+heroku container:release web
+heroku config:set WORKERS=2
+heroku config:set USAGE_LOGGERS_URL="http://marina:4001/message"
+curl "http://XXX-resurface.herokuapp.com/ping"
+heroku apps:destroy XXX-resurface
 ```

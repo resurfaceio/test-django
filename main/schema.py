@@ -1,34 +1,37 @@
 import graphene
 from graphql.error import GraphQLError
 
-from .models import Logs
-from .types import LogsType
+from .models import News
+from .types import NewsType
 
 
 class Query(graphene.ObjectType):
-    logs = graphene.List(LogsType)
+    newss = graphene.List(NewsType)
 
-    def resolve_logs(self, ingo):
-        logs_ = Logs.objects.all()
-        return logs_
+    def resolve_newss(self, info):
+        news_ = News.objects.all()
+        return news_
 
 
-class AddLog(graphene.Mutation):
-    log = graphene.Field(LogsType)
+class AddNews(graphene.Mutation):
+    news = graphene.Field(NewsType)
 
     class Arguments:
-        log = graphene.String(required=True)
+        news = graphene.String(required=True)
 
-    def mutate(self, info, log):
+    def mutate(self, info, title="", body=""):
         if not info.context.user.is_authenticated:
             raise GraphQLError("User not authenticated!")
-        log = Logs(log=log, user=info.context.user)
-        log.save()
-        return AddLog(log=log)
+        news = News(title=title, body=body, user=info.context.user)
+        news.save()
+        return AddNews(
+            title=title,
+            body=body,
+        )
 
 
 class Mutation(graphene.ObjectType):
-    add_log = AddLog.Field()
+    add_news = AddNews.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

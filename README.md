@@ -1,17 +1,38 @@
 # test-django
 
-## Docker Deployment
+## Environment Setup
+
+**Important:** Update the following line(s) on `.env` file:
 
 ```
-docker build -t test-django --no-cache .
-docker run -d --name test-django -e USAGE_LOGGERS_URL="http://marina:4001/message" -e WORKERS=2 -e PORT=8000 -p 80:8000 test-django
-curl "http://localhost/ping"
-docker logs -f test-django
-docker stop test-django
-docker rm test-django
+USAGE_LOGGERS_URL = https://<resurface-host>:<port>/message
 ```
-* Don't set USAGE_LOGGERS_URL to `localhost` (your Resurface database isn't running inside *this* container)
-* For maximum performance, leave out USAGE_LOGGERS_URL to disable loggers completely
+
+- Don't set USAGE*LOGGERS_URL to `localhost` (your Resurface database isn't running inside \_this* container)
+- For maximum performance, leave out USAGE_LOGGERS_URL to disable loggers completely
+
+## Docker Deployment
+
+Run the following command in bash to get started:
+
+```
+make
+```
+
+Cleanup commands
+
+```
+make stop
+make down
+
+docker rm hackernews_django
+```
+
+View Logs
+
+```
+docker logs -f hackernews_django
+```
 
 ## Heroku Deployment
 

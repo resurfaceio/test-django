@@ -19,6 +19,13 @@ Run the following command in bash to get started:
 make
 ```
 
+Run database migrations
+
+```
+make migrations
+make migrate
+```
+
 Cleanup commands
 
 ```

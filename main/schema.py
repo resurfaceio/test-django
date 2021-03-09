@@ -19,12 +19,15 @@ class AddNews(graphene.Mutation):
     class Arguments:
         news = graphene.String(required=True)
 
-    def mutate(self, info, news):
+    def mutate(self, info, title="", body=""):
         if not info.context.user.is_authenticated:
             raise GraphQLError("User not authenticated!")
-        news = News(news=news, user=info.context.user)
+        news = News(title=title, body=body, user=info.context.user)
         news.save()
-        return AddNews(news=news)
+        return AddNews(
+            title=title,
+            body=body,
+        )
 
 
 class Mutation(graphene.ObjectType):

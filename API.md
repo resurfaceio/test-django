@@ -21,7 +21,7 @@ The following query will return news information availabe in the local databse.
 query{
   newss{
     id
-    news
+    title
     user{
       username
     }
@@ -69,10 +69,10 @@ Example:
 
 ```
 mutation{
-  addNews(news: "This is a great short news!"){
-    log{
+  addNews(title: "This is a great short news!", body: "body here"){
+    news{
       id
-      news
+      title
       user{
           username
       }

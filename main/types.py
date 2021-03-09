@@ -1,13 +1,13 @@
 import graphene
 from graphene_django import DjangoObjectType
 
-from .models import Logs
+from .models import News
 
 
-class LogsType(DjangoObjectType):
+class NewsType(DjangoObjectType):
     class Meta:
-        model = Logs
+        model = News
 
 
-class LogInput(graphene.InputObjectType):
-    log = graphene.String()
+class NewsInput(graphene.InputObjectType):
+    news = graphene.String()

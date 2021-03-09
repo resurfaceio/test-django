@@ -15,13 +15,13 @@ http://localhost:8000/
 
 ## General Queries
 
-The following query will return logs information availabe in the local databse.
+The following query will return news information availabe in the local databse.
 
 ```
 query{
-  logs{
+  newss{
     id
-    log
+    news
     user{
       username
     }
@@ -63,16 +63,16 @@ query{
 }
 ```
 
-`addLog` mutation requires user to be authenticated.
+`addNews` mutation requires user to be authenticated.
 
 Example:
 
 ```
 mutation{
-  addLog(log: "I am having a nice day today!"){
+  addNews(news: "This is a great short news!"){
     log{
       id
-      log
+      news
       user{
           username
       }

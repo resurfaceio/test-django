@@ -1,21 +1,25 @@
 PROJECT_NAME=hackernews
 
-all: run
-
-run:
-	@docker-compose up
-
-upgrade-run:
-	@docker-compose up --force-recreate --build hackernews_django
+start:
+	@docker-compose up --force-recreate --build --detach
+	@docker exec -it hackernews_django python manage.py makemigrations
+	@docker exec -it hackernews_django python manage.py migrate --run-syncdb
 
 stop:
 	@docker-compose stop
-
-down:
 	@docker-compose down
+	@docker rmi test-django-heroku_hackernews_django
 
-migrations:
-	@docker exec -it hackernews_django python manage.py makemigrations
+bash:
+	@docker exec -it hackernews_django bash
 
-migrate:
-	@docker exec -it hackernews_django python manage.py migrate --run-syncdb
+logs:
+	@docker logs -f hackernews_django
+
+ping:
+	@echo curl "http://localhost/ping"
+	@curl "http://localhost/ping"
+
+restart:
+	@docker-compose stop
+	@docker-compose up

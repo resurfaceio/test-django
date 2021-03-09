@@ -1,55 +1,47 @@
 # test-django
+Test GraphQL API built with Django 
 
-## Environment Setup
+## Configure Environment
 
-**Important:** Update the following line(s) on `.env` file:
-
-```
-USAGE_LOGGERS_URL = https://<resurface-host>:<port>/message
-```
-
-- Don't set USAGE*LOGGERS_URL to `localhost` (your Resurface database isn't running inside \_this* container)
-- For maximum performance, leave out USAGE_LOGGERS_URL to disable loggers completely
-
-## Docker Deployment
-
-Run the following command in bash to get started:
+Install your Resurface database: https://resurface.io/pilot-edition
 
 ```
-make
+# configure to point to your Resurface database host
+export USAGE_LOGGERS_URL=http://<resurface-host>:4001/message
 ```
 
-Run database migrations
+## Deploy Locally
 
 ```
-make migrations
-make migrate
+make start     # rebuild and start containers
+make ping      # make simple ping request
+make bash      # open shell session
+make logs      # follow container logs
+make stop      # halt and remove containers
 ```
 
-Cleanup commands
+## Deploy to Heroku
 
+1. Create Heroku app
 ```
-make stop
-make down
-
-docker rm hackernews_django
+heroku create django-resurface
 ```
 
-View Logs
-
+2. Push to Heroku
 ```
-docker logs -f hackernews_django
-```
-
-## Heroku Deployment
-
-```
-heroku create XXX-resurface
 heroku container:login
 heroku container:push web
 heroku container:release web
 heroku config:set WORKERS=2
-heroku config:set USAGE_LOGGERS_URL="http://marina:4001/message"
-curl "http://XXX-resurface.herokuapp.com/ping"
-heroku apps:destroy XXX-resurface
+heroku config:set USAGE_LOGGERS_URL=$USAGE_LOGGERS_URL
+```
+
+3. Make ping request
+```
+curl "http://django-resurface.herokuapp.com/ping"
+```
+
+4. Delete Heroku app
+```
+heroku apps:destroy django-resurface
 ```

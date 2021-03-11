@@ -8,7 +8,7 @@ start:
 stop:
 	@docker-compose stop
 	@docker-compose down
-	@docker rmi test-django-heroku_hackernews_django
+	@docker rmi hackernews_django
 
 bash:
 	@docker exec -it hackernews_django bash

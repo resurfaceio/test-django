@@ -19,7 +19,20 @@ The following query will return news information availabe in the local databse.
 
 ```
 query{
-  newss{
+  allNews{
+    id
+    title
+    user{
+      username
+    }
+  }
+}
+```
+Get news by ID:
+
+```
+query{
+  newsById(id: "1"){
     id
     title
     user{
@@ -29,7 +42,7 @@ query{
 }
 ```
 
-To add the log you should be authenticated in the system.
+To add the news you should be authenticated in the system.
 
 ## Auth required Mutations
 

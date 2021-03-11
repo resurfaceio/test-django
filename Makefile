@@ -8,7 +8,6 @@ start:
 stop:
 	@docker-compose stop
 	@docker-compose down
-	@docker rmi hackernews_django
 
 bash:
 	@docker exec -it hackernews_django bash

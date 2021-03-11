@@ -30,10 +30,7 @@ class AddNews(graphene.Mutation):
             raise GraphQLError("User not authenticated!")
         news = NewsModel(title=title, body=body, user=info.context.user)
         news.save()
-        return AddNews(
-            title=title,
-            body=body,
-        )
+        return AddNews(news=news)
 
 
 class Mutation(graphene.ObjectType):

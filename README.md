@@ -1,5 +1,10 @@
 # test-django
-Test GraphQL API built with Django 
+Example GraphQL API built with Django 
+
+## Requirements
+
+* Install `docker` and `docker-compose`
+* Sign up for [Resurface Pilot Edition](https://resurface.io/pilot-edition) access
 
 ## Deploy Locally
 

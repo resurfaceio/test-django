@@ -1,9 +1,17 @@
 version: '3.2'
 
 services:
-  hackernews_django:
+  resurface:
+    image: docker.resurface.io/release/pilot
+    container_name: hackernews_resurface
+    ports:
+      - '4000:4000'
+      - '4001:4001'
+      - '4002:4002'
+
+  hackernews:
     build: .
-    container_name: hackernews_django
+    container_name: hackernews
     volumes:
       - ./:/app
     command: gunicorn --bind :8000 django_integration_test.wsgi:application

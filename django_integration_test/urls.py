@@ -23,6 +23,6 @@ from .views import pong
 urlpatterns = [
     # path("admin/", admin.site.urls),
     path("ping", pong, name="ping-pong"),
-    path("graphql", GraphQLView.as_view(graphiql=True), name="graphql"),
+    # path("graphql", GraphQLView.as_view(graphiql=True), name="graphql"),
     path("", csrf_exempt(GraphQLView.as_view(graphiql=False)), name="index"),
 ]
